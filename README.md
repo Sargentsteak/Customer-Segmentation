@@ -12,3 +12,5 @@ The most common ways in which businesses segment their customer base are:
 5. Behavioral data, such as spending and consumption habits, product/service usage, and desired benefits.
 
 Here we are using the Mall Customers dataset for segmentation.
+
+Dataset link : https://www.kaggle.com/shwetabh123/mall-customers
