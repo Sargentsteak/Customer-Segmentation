@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[2]:I started with loading all the libraries and dependencies. The columns in the dataset are customer id, gender, age, income and spending score.
+
 
 
 import numpy as np
@@ -23,7 +24,8 @@ df = pd.read_csv(r'C:\Users\piyus\OneDrive\Desktop\archive\Mall_Customers.csv')
 df.head()
 
 
-# In[5]:
+# In[5]:I dropped the id column as that does not seem relevant to the context. Also I plotted the age frequency of customers.
+
 
 
 df.drop(['CustomerID'], axis =1, inplace =True)
@@ -39,7 +41,9 @@ sns.violinplot(y = df["Age"])
 plt.show()
 
 
-# In[7]:
+# In[7]:Next I made a box plot of spending score and annual income to better visualize the distribution range. 
+# The range of spending score is clearly more than the annual income range.
+
 
 
 plt.figure(figsize=(15,6))
@@ -50,7 +54,8 @@ sns.boxplot(y = df["Annual Income (k$)"])
 plt.show()
 
 
-# In[8]:
+# In[8]:I made a bar plot to check the distribution of male and female population in the dataset. The female population clearly outweighs the male counterpart.
+
 
 
 genders = df.Genre.value_counts()
@@ -60,7 +65,8 @@ sns.barplot(x= genders.index,y = genders.values)
 plt.show()
 
 
-# In[9]:
+# In[9]:Next I made a bar plot to check the distribution of number of customers in each age group. Clearly the 26–35 age group outweighs every other age group.
+
 
 
 age18_25 = df.Age[(df.Age <= 25) & (df.Age >= 18)]
@@ -80,7 +86,9 @@ plt.ylabel("Number of Customer")
 plt.show()
 
 
-# In[10]:
+# In[10]:I continued with making a bar plot to visualize the number of customers according to their spending scores. 
+# The majority of the customers have spending score in the range 41–60.
+
 
 
 ss1_20 = df["Spending Score (1-100)"][(df["Spending Score (1-100)"] >= 1) & (df["Spending Score (1-100)"] <= 20)]
@@ -100,7 +108,8 @@ plt.ylabel("Number of Customer Having the Score")
 plt.show()
 
 
-# In[11]:
+# In[11]:Also I made a bar plot to visualize the number of customers according to their annual income. 
+# The majority of the customers have annual income in the range 60000 and 90000.
 
 
 ai0_30 = df["Annual Income (k$)"][(df["Annual Income (k$)"] >= 0) & (df["Annual Income (k$)"] <= 30)]
@@ -120,7 +129,9 @@ plt.ylabel("Number of Customer")
 plt.show()
 
 
-# In[14]:
+# In[14]:Next I plotted Within Cluster Sum Of Squares (WCSS) against the the number of clusters (K Value) to figure out the optimal number of clusters value. 
+# WCSS measures sum of distances of observations from their cluster centroids .
+# where Yi is centroid for observation Xi. The main goal is to maximize number of clusters and in limiting case each data point becomes its own cluster centroid.
 
 
 from sklearn.cluster import KMeans
@@ -138,8 +149,19 @@ plt.ylabel("WCSS")
 plt.show()
 
 
-# In[21]:
+# In[21]:The Elbow Method
+# Calculate the Within Cluster Sum of Squared Errors (WSS) for different values of k, and choose the k for which WSS first starts to diminish. 
+# In the plot of WSS-versus k, this is visible as an elbow.
+# The steps can be summarized in the below steps:
+# Compute K-Means clustering for different values of K by varying K from 1 to 10 clusters.
+# For each K, calculate the total within-cluster sum of square (WCSS).
+# Plot the curve of WCSS vs the number of clusters K.
+# The location of a bend (knee) in the plot is generally considered as an indicator of the appropriate number of clusters.
 
+
+# The optimal K value is found to be 5 using the elbow method.
+# Finally I made a 3D plot to visualize the spending score of the customers with their annual income. The data points are separated into 5 classes
+# which are represented in different colours as shown in the 3D plot.
 
 
 km = KMeans(n_clusters=5)
